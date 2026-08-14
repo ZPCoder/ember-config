@@ -7,6 +7,8 @@ const root = process.cwd();
 const outputDir = path.join(root, "public/cards");
 const sourceDir = path.join(root, "public/card-art-sources");
 const anchor = path.join(sourceDir, "frost-anchor.png");
+const ART_WIDTH = 512;
+const ART_HEIGHT = 640;
 const existingFiles = await fs.readdir(outputDir);
 const existingByPrefix = new Map();
 for (const file of existingFiles.filter((name) => name.endsWith(".webp"))) {
@@ -43,12 +45,12 @@ for (let position = 0; position < cardsToGenerate.length; position += 1) {
   const source = candidates[position % Math.max(candidates.length, 1)] ?? anchor;
   const hue = (theme.offset * 29 + position * 17) % 360;
   const base = await sharp(source)
-    .resize(768, 960, { fit: "cover", position: position % 2 === 0 ? "centre" : "entropy" })
+    .resize(ART_WIDTH, ART_HEIGHT, { fit: "cover", position: position % 2 === 0 ? "centre" : "entropy" })
     .modulate({ hue, saturation: 1.03 + (position % 5) * 0.04, brightness: 0.94 + (position % 7) * 0.018 })
-    .composite([{ input: accentSvg(768, 960, primary, secondary, position, card.type), blend: "screen" }])
-    // Keep the art crisp on phone screens while keeping the deployable site
-    // lightweight enough for source-repository and mobile delivery.
-    .webp({ quality: 76, effort: 6, smartSubsample: true });
+    .composite([{ input: accentSvg(ART_WIDTH, ART_HEIGHT, primary, secondary, position, card.type), blend: "screen" }])
+    // 512×640 keeps the 4:5 card ratio crisp on phones while keeping the
+    // deployable site light enough for source-repository and mobile delivery.
+    .webp({ quality: 72, effort: 6, smartSubsample: true });
   await base.toFile(path.join(outputDir, `${card.id}.webp`));
 }
 
