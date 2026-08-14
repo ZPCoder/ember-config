@@ -46,7 +46,9 @@ for (let position = 0; position < cardsToGenerate.length; position += 1) {
     .resize(768, 960, { fit: "cover", position: position % 2 === 0 ? "centre" : "entropy" })
     .modulate({ hue, saturation: 1.03 + (position % 5) * 0.04, brightness: 0.94 + (position % 7) * 0.018 })
     .composite([{ input: accentSvg(768, 960, primary, secondary, position, card.type), blend: "screen" }])
-    .webp({ quality: 94, effort: 4, smartSubsample: true });
+    // Keep the art crisp on phone screens while keeping the deployable site
+    // lightweight enough for source-repository and mobile delivery.
+    .webp({ quality: 76, effort: 6, smartSubsample: true });
   await base.toFile(path.join(outputDir, `${card.id}.webp`));
 }
 
