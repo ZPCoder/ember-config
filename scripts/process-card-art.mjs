@@ -16,15 +16,15 @@ const destination = resolve(destinationArg);
 await mkdir(dirname(destination), { recursive: true });
 
 await sharp(source)
-  .resize(768, 960, {
+  .resize(384, 480, {
     fit: "cover",
     position: "attention",
   })
-  .webp({ quality: 84, smartSubsample: true })
+  .webp({ quality: 72, effort: 6, smartSubsample: true })
   .toFile(destination);
 
 const metadata = await sharp(destination).metadata();
-if (metadata.width !== 768 || metadata.height !== 960) {
+if (metadata.width !== 384 || metadata.height !== 480) {
   throw new Error(`Unexpected output dimensions: ${metadata.width}x${metadata.height}`);
 }
 
