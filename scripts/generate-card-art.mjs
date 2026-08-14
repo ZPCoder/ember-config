@@ -9,6 +9,14 @@ const sourceDir = path.join(root, "public/card-art-sources");
 const anchor = path.join(sourceDir, "frost-anchor.png");
 const ART_WIDTH = 384;
 const ART_HEIGHT = 480;
+const imageGenManifestPath = path.join(root, "public/card-art-imagegen.json");
+let imageGenManifest = { workflow: "built-in-imagegen-one-card-per-call", generatedCount: 0, cards: [] };
+try {
+  imageGenManifest = JSON.parse(await fs.readFile(imageGenManifestPath, "utf8"));
+} catch {
+  // The manifest is optional while new individually generated art is being added.
+}
+const imageGenIds = new Set(imageGenManifest.cards.map((entry) => entry.id));
 const existingFiles = await fs.readdir(outputDir);
 const existingByPrefix = new Map();
 for (const file of existingFiles.filter((name) => name.endsWith(".webp"))) {
@@ -39,6 +47,7 @@ function accentSvg(width, height, primary, secondary, index, type) {
 const regenerateAll = process.env.FORCE_ALL_CARD_ART === "1";
 const cardsToGenerate = CARD_CATALOG.filter((card) =>
   (regenerateAll || card.id.includes("-season-")) &&
+  (!imageGenIds.has(card.id) || process.env.FORCE_IMAGEGEN_OVERWRITE === "1") &&
   (!existingFiles.includes(`${card.id}.webp`) || process.env.FORCE_CARD_ART === "1" || regenerateAll),
 );
 for (let position = 0; position < cardsToGenerate.length; position += 1) {
@@ -63,9 +72,16 @@ const manifest = {
   generatedAt: new Date().toISOString(),
   catalogCount: CARD_CATALOG.length,
   generatedCount: cardsToGenerate.length,
-  generatedBy: "imagegen-anchor-plus-deterministic-card-art-variants",
+  individuallyGeneratedCount: imageGenIds.size,
+  generatedBy: "imagegen-per-card-plus-legacy-variants",
   anchor: "public/card-art-sources/frost-anchor.png",
-  cards: CARD_CATALOG.map((card) => ({ id: card.id, faction: card.faction, type: card.type, art: `/cards/${card.id}.webp` })),
+  cards: CARD_CATALOG.map((card) => ({
+    id: card.id,
+    faction: card.faction,
+    type: card.type,
+    art: `/cards/${card.id}.webp`,
+    source: imageGenIds.has(card.id) ? "imagegen" : "legacy-variant",
+  })),
 };
 await fs.writeFile(path.join(root, "public/card-art-manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(`Generated ${cardsToGenerate.length} card art assets; ${CARD_CATALOG.length} cards now have manifest entries.`);
