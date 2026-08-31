@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "resources": [
+    {
+      "id": "card-catalog/json",
+      "kind": "config-bundle",
+      "version": "1.0.0",
+      "sha256": "42a38bd57d713bb1bf564ac8bb8c8fe64ec3f7e624c23c1d30a887ad2fc05051",
+      "url": "https://assets.ember-protocol.example/config/1.0.0/cards.json",
+      "size": 524572,
+      "fileCount": 1,
+      "mediaType": "application/json",
+      "licenseId": "LicenseRef-Ember-Proprietary",
+      "licenseProof": "licenses/LicenseRef-Ember-Proprietary.md",
+      "sourceProof": "provenance/catalog-1.0.0.json"
+    },
+    {
+      "id": "card-art/full-webp",
+      "kind": "remote-asset-set",
+      "version": "1.0.0",
+      "sha256": "dde0cdc9bf9375232a5d59c14e97e7764fbed3f6d4d847ffc36aceb1be9aeab0",
+      "url": "https://assets.ember-protocol.example/card-art/1.0.0/{cardId}.webp",
+      "size": 36915650,
+      "fileCount": 1000,
+      "mediaType": "image/webp",
+      "licenseId": "LicenseRef-Ember-Proprietary",
+      "licenseProof": "licenses/LicenseRef-Ember-Proprietary.md",
+      "sourceProof": "provenance/card-art-1.0.0.json"
+    }
+  ]
+}

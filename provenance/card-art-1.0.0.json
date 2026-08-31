@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "resourceId": "card-art/full-webp",
+  "resourceVersion": "1.0.0",
+  "sourceRepository": "ZPCoder/Ember-Protocol",
+  "sourceTag": "monolith-freeze-v1",
+  "sourceCommit": "ba8610c7664f0f8a7cfdd70f479e61c8c41a77d1",
+  "sourcePaths": [
+    "public/cards/",
+    "flutter_app/assets/cards/"
+  ],
+  "sourceEvidence": [
+    {
+      "path": "README.md",
+      "assertion": "The frozen monolith records 1,000 original cards with independent card-art resources."
+    },
+    {
+      "path": "licenses/LicenseRef-Ember-Proprietary.md",
+      "assertion": "Project-owner commercial-use and official-build redistribution declaration."
+    }
+  ],
+  "fileCount": 1000,
+  "totalBytes": 36915650,
+  "duplicateTreesByteIdentical": true,
+  "aggregateSha256": "dde0cdc9bf9375232a5d59c14e97e7764fbed3f6d4d847ffc36aceb1be9aeab0",
+  "aggregateAlgorithm": "sha256(sorted UTF-8 records: filename + NUL + byte-size + NUL + file-sha256 + LF)",
+  "licenseId": "LicenseRef-Ember-Proprietary"
+}

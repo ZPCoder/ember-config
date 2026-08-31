@@ -1,0 +1,7 @@
+{
+  "version": "1.0.0",
+  "minimumClientVersion": "0.1.0",
+  "sha256": "42a38bd57d713bb1bf564ac8bb8c8fe64ec3f7e624c23c1d30a887ad2fc05051",
+  "bundleUrl": "https://assets.ember-protocol.example/config/1.0.0/cards.json",
+  "size": 524572
+}

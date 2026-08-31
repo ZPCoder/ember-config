@@ -1,0 +1,47 @@
+{
+  "name": "@zpcoder/ember-config",
+  "version": "0.1.0",
+  "description": "Immutable, hashed gameplay configuration and licensed resource manifests",
+  "type": "module",
+  "private": false,
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "dist",
+    "data",
+    "manifests",
+    "licenses",
+    "provenance/card-art-1.0.0.json",
+    "provenance/catalog-1.0.0.json",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./config-manifest": "./manifests/config-1.0.0.json",
+    "./resource-manifest": "./manifests/resources-1.0.0.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node scripts/build-config.mjs",
+    "check:manifests": "node scripts/build-config.mjs --check",
+    "verify:source": "node scripts/verify-source-art.mjs ../../public/cards ../../flutter_app/assets/cards",
+    "test": "npm run check:manifests && npm run build && node --test tests/*.test.mjs",
+    "version-packages": "npx --yes @changesets/cli@2.29.8 version",
+    "release": "npx --yes @changesets/cli@2.29.8 publish"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZPCoder/ember-config.git"
+  }
+}

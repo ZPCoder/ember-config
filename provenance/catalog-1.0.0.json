@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "resourceId": "card-catalog/json",
+  "resourceVersion": "1.0.0",
+  "sourceRepository": "ZPCoder/Ember-Protocol",
+  "sourceTag": "monolith-freeze-v1",
+  "sourceCommit": "ba8610c7664f0f8a7cfdd70f479e61c8c41a77d1",
+  "sourcePath": "flutter_app/assets/cards.json",
+  "fileCount": 1,
+  "totalBytes": 524572,
+  "sha256": "42a38bd57d713bb1bf564ac8bb8c8fe64ec3f7e624c23c1d30a887ad2fc05051",
+  "licenseId": "LicenseRef-Ember-Proprietary"
+}
