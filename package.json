@@ -30,10 +30,11 @@
     "check:manifests": "node scripts/build-config.mjs --check",
     "verify:source": "node scripts/verify-source-art.mjs ../../public/cards ../../flutter_app/assets/cards",
     "test": "npm run check:manifests && npm run build && node --test tests/*.test.mjs",
-    "version-packages": "npx --yes @changesets/cli@2.29.8 version",
-    "release": "npx --yes @changesets/cli@2.29.8 publish"
+    "version-packages": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "2.29.8",
     "typescript": "5.9.3"
   },
   "publishConfig": {
